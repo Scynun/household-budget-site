@@ -41,6 +41,7 @@ main { max-width: 1080px; margin: 0 auto; padding: 20px; }
 .g2 { grid-template-columns: 1fr 1fr; }
 .g3 { grid-template-columns: repeat(3, 1fr); }
 .card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); padding: 16px; min-width: 0; }
+.stat .label { color: var(--muted); font-size: 13px; }
 .stat.hero { border-top: 3px solid var(--gold); }
 .stat .value { font-size: 24px; font-weight: 800; margin: 2px 0; font-variant-numeric: tabular-nums; }
 .stat .delta { font-size: 13px; }
