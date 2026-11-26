@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ngân sách gia đình — Gia đình Minh &amp; Lan</title>
+<meta name="description" content="Theo dõi thu chi, ngân sách, hóa đơn và mục tiêu tiết kiệm của hộ gia đình — chạy hoàn toàn offline.">
+<link rel="icon" href="favicon.svg">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <div class="top-inner">
+    <div>
+      <div class="brand">🏠 Ngân sách <span>Gia đình</span></div>
+      <div class="sub">Gia đình Minh &amp; Lan · TP. Hồ Chí Minh · đơn vị: VNĐ</div>
+    </div>
+    <nav class="main" id="nav">
+      <a href="#/" data-route="">Tổng quan</a>
+      <a href="#/transactions" data-route="transactions">Giao dịch</a>
+      <a href="#/budgets" data-route="budgets">Ngân sách</a>
+      <a href="#/bills" data-route="bills">Hóa đơn</a>
+      <a href="#/goals" data-route="goals">Mục tiêu</a>
+      <a href="#/reports" data-route="reports">Báo cáo</a>
+      <a href="#/settings" data-route="settings">Cài đặt</a>
+    </nav>
+  </div>
+</header>
+<main id="app" aria-live="polite"></main>
+<footer>Ngân sách Gia đình — dữ liệu lưu trên trình duyệt của bạn (localStorage), không gửi đi đâu. Chạy hoàn toàn offline.</footer>
+<script type="module" src="main.js"></script>
+</body>
+</html>
