@@ -1,6 +1,18 @@
 // Router + event wiring for the household budget SPA (hash routing, no build step).
+// Only the dashboard renderer loads up front (views.js). The other six routes
+// live in views-pages.js and are fetched with import() on first navigation,
+// so they stay out of the first load (see the dossier Totals line).
 import { loadState, saveState, resetState, latestMonth } from './store.js';
-import { renderDashboard, renderTransactions, renderBudgets, renderBills, renderGoals, renderReports, renderSettings } from './views.js';
+import { renderDashboard } from './views.js';
+
+// Cached promise for the lazily loaded routes module.
+let pagesPromise = null;
+function loadPages() {
+  if (!pagesPromise) pagesPromise = import('./views-pages.js');
+  return pagesPromise;
+}
+// Monotonic render counter: a slow import() must not overwrite a newer route.
+let renderSeq = 0;
 
 let state = loadState();
 
@@ -22,17 +34,22 @@ function route() {
   return hash.split('/')[0] || '';
 }
 
-function render() {
+async function render() {
+  const seq = ++renderSeq;
   const r = route();
   nav.querySelectorAll('a').forEach(a => a.classList.toggle('active', a.dataset.route === r));
   let html = '';
-  if (r === 'transactions') html = renderTransactions(state, ctx);
-  else if (r === 'budgets') html = renderBudgets(state, ctx);
-  else if (r === 'bills') html = renderBills(state, ctx);
-  else if (r === 'goals') html = renderGoals(state, ctx);
-  else if (r === 'reports') html = renderReports(state, ctx);
-  else if (r === 'settings') html = renderSettings(state, ctx);
-  else html = renderDashboard(state, ctx);
+  if (r === 'transactions' || r === 'budgets' || r === 'bills' || r === 'goals' || r === 'reports' || r === 'settings') {
+    const pages = await loadPages();
+    if (seq !== renderSeq) return; // a newer navigation happened meanwhile
+    if (r === 'transactions') html = pages.renderTransactions(state, ctx);
+    else if (r === 'budgets') html = pages.renderBudgets(state, ctx);
+    else if (r === 'bills') html = pages.renderBills(state, ctx);
+    else if (r === 'goals') html = pages.renderGoals(state, ctx);
+    else if (r === 'reports') html = pages.renderReports(state, ctx);
+    else if (r === 'settings') html = pages.renderSettings(state, ctx);
+  } else html = renderDashboard(state, ctx);
+  if (seq !== renderSeq) return;
   app.innerHTML = html;
   wire();
 }
