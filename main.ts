@@ -3,14 +3,14 @@
 // What this is: a small static web app that helps one household plan a month's money. The
 // household types in its income, adds the expenses it expects (rent, groceries, transport,
 // bills, savings and the rest), and the app shows, live, how much is left over, how the
-// spending splits across categories, and a per-person share when several people live together.
+// spending splits across categories, monthly budgets, bills and savings goals.
 // Everything runs in the browser with no account and no server: figures are saved in the
 // browser's own local storage, so the household can close the tab and come back to the same
 // numbers, and the page works fully offline once it has loaded.
 //
 // What lives beside this file:
 //   app/         — the site itself: index.html plus its CSS and JavaScript (no build step).
-//   screenshots/ — three or four PNG captures of the site running, taken in a real browser;
+//   screenshots/ — three or four JPEG captures of the site running, taken in a real browser;
 //                  the first one alphabetically is the cover the judge sees, and one is a
 //                  phone-sized 390 x 844 view (see shots.json for which views were taken).
 //   serve.ts     — a tiny local server for previewing the site during development.
